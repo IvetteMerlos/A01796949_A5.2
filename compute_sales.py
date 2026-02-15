@@ -1,3 +1,13 @@
+"""
+Actividad 5.2 - Compute Sales
+
+Programa que:
+- Lee un catálogo de precios (JSON)
+- Lee un registro de ventas (JSON)
+- Calcula el total de ventas
+- Genera un archivo SalesResults.txt
+"""
+
 import json
 import sys
 import time
@@ -13,8 +23,6 @@ def load_json(path: str) -> Any:
         print(f"ERROR: No se encontró el archivo: {path}")
     except json.JSONDecodeError as exc:
         print(f"ERROR: JSON inválido en {path}: {exc}")
-    except Exception as exc:
-        print(f"ERROR: No se pudo leer {path}: {exc}")
     return None
 
 
@@ -102,6 +110,7 @@ def compute_total_sales(prices: dict[str, float], sales: Any) -> tuple[float, in
 
 
 def format_results(total: float, errors: int, elapsed: float) -> str:
+    """Build formatted output string."""
     return (
         "=== Sales Results ===\n"
         f"Total Sales: ${total:.2f}\n"
@@ -111,11 +120,13 @@ def format_results(total: float, errors: int, elapsed: float) -> str:
 
 
 def write_results(text: str, filename: str = "SalesResults.txt") -> None:
+    """Write formatted results to SalesResults.txt."""
     with open(filename, "w", encoding="utf-8") as f:
         f.write(text)
 
 
 def main() -> int:
+    """Main entry point of the program."""
     if len(sys.argv) != 3:
         print("Uso: python compute_sales.py priceCatalogue.json salesRecord.json")
         return 1
