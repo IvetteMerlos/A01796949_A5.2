@@ -34,12 +34,15 @@ def build_price_map(catalog: Any) -> dict[str, float]:
     prices: dict[str, float] = {}
 
     if not isinstance(catalog, list):
-        print("ERROR: El catálogo debe ser una lista de productos (JSON array).")
+        print("ERROR: El catálogo debe ser una lista "
+              "de productos (JSON array).")
         return prices
 
     for item in catalog:
         if not isinstance(item, dict):
-            print(f"AVISO: Entrada inválida en catálogo (no es objeto): {item}")
+            print(
+                f"AVISO: Entrada inválida en catálogo "
+                f"(no es objeto): {item}")
             continue
 
         title = item.get("title")
@@ -60,7 +63,10 @@ def build_price_map(catalog: Any) -> dict[str, float]:
     return prices
 
 
-def compute_total_sales(prices: dict[str, float], sales: Any) -> tuple[float, int]:
+def compute_total_sales(
+    prices: dict[str, float],
+    sales: Any
+) -> tuple[float, int]:
     """
     Compute total sales cost.
     Expects sales to be a list of dicts with keys: 'Product', 'Quantity'.
@@ -70,7 +76,8 @@ def compute_total_sales(prices: dict[str, float], sales: Any) -> tuple[float, in
     errors = 0
 
     if not isinstance(sales, list):
-        print("ERROR: El registro de ventas debe ser una lista (JSON array).")
+        print("ERROR: El registro de ventas debe ser una "
+              "lista (JSON array).")
         return total, 1
 
     for record in sales:
@@ -128,7 +135,8 @@ def write_results(text: str, filename: str = "SalesResults.txt") -> None:
 def main() -> int:
     """Main entry point of the program."""
     if len(sys.argv) != 3:
-        print("Uso: python compute_sales.py priceCatalogue.json salesRecord.json")
+        print("Uso: python compute_sales.py "
+              "priceCatalogue.json salesRecord.json")
         return 1
 
     catalog_path = sys.argv[1]
