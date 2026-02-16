@@ -101,11 +101,6 @@ def compute_total_sales(
             errors += 1
             continue
 
-        if qty < 0:
-            print(f"AVISO: Cantidad negativa para '{product}': {qty}")
-            errors += 1
-            continue
-
         if product not in prices:
             print(f"AVISO: Producto no existe en catálogo: '{product}'")
             errors += 1
